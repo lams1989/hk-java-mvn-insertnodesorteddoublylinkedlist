@@ -22,54 +22,55 @@ public class InsertNodeSortedDoublyLinkedList {
 			this.head = null;
 			this.tail = null;
 		}
+	}
 
-		public static void main(String args[]) {
+	public static void main(String args[]) {
 
-			DoublyLinkedList llist = new DoublyLinkedList();
-			int[] llistItem = { 141, 164, 302, 474, 530 };
-			int data = 300;
-			for (int i = 0; i < llistItem.length; i++) {
-				DoublyLinkedListNode llist_head = insertNodeAtHead(llist.head, llistItem[i]);
-				llist.head = llist_head;
-			}
-
-			printLinkedList(sortedInsert(llist.head, data));
+		DoublyLinkedList llist = new DoublyLinkedList();
+		int[] llistItem = {530, 474, 302, 164, 141 };
+		int data = 300;
+		for (int i = 0; i < llistItem.length; i++) {
+			DoublyLinkedListNode llist_head = insertNodeAtHead(llist.head, llistItem[i]);
+			llist.head = llist_head;
 		}
 
-		static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode head, int data) {
-			DoublyLinkedListNode n = new DoublyLinkedListNode(data);
+		printLinkedList(sortedInsert(llist.head, data));
+	}
 
-			if (head == null) {
-				return n;
-				
-			} else if (data >= head.data) {
-				n.next = head;
-				return n;
-			} else {
-				DoublyLinkedListNode aux = sortedInsert(head.next, data);
-				head.next = aux;
-				aux.prev = head;
-				return head;
-			}
+	static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode head, int data) {
+		DoublyLinkedListNode n = new DoublyLinkedListNode(data);
 
+		if (head == null) {
+			return n;
+
+		} else if (data <= head.data) {
+			n.next = head;
+			return n;
+		} else {
+			DoublyLinkedListNode aux = sortedInsert(head.next, data);
+			head.next = aux;
+			aux.prev = head;
+			return head;
 		}
 
-		static DoublyLinkedListNode insertNodeAtHead(DoublyLinkedListNode head, int data) {
-			DoublyLinkedListNode nodeInsert = new DoublyLinkedListNode(data);
-			if (head == null) {
-				return nodeInsert;
-			}
-			nodeInsert.next = head;
+	}
+
+	static DoublyLinkedListNode insertNodeAtHead(DoublyLinkedListNode head, int data) {
+		DoublyLinkedListNode nodeInsert = new DoublyLinkedListNode(data);
+		if (head == null) {
 			return nodeInsert;
 		}
+		nodeInsert.next = head;
+		
+		return nodeInsert;
+	}
 
-		static void printLinkedList(DoublyLinkedListNode head) {
+	static void printLinkedList(DoublyLinkedListNode head) {
 
-			while (head != null) {
-				System.out.println(head.data);
-				head = head.next;
-			}
-
+		while (head != null) {
+			System.out.println(head.data);
+			head = head.next;
 		}
+
 	}
 }
